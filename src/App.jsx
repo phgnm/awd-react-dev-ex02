@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 
 import Background from './components/Background'
 import AppRouter from './routes/AppRouter'
+import ScrollToTopButton from './components/ScrollToTopButton'
 import './App.css'
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Background />
       <div className="relative z-10 max-w-6xl mx-auto px-4">
         <AppRouter />
+        <ScrollToTopButton />
       </div>
     </div>
   )
