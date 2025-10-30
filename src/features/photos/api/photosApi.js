@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const BASE_URL = "https://picsum.photos/v2";
+const PICSUM_API_URL = "https://picsum.photos";
 
 export async function fetchPhotos(page = 1, limit = 30) {
   try {
-    const response = await axios.get(`${BASE_URL}/list?page=${page}&limit=${limit}`);
+    const response = await axios.get(`${PICSUM_API_URL}/v2/list?page=${page}&limit=${limit}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching photos:", error);
@@ -13,9 +13,12 @@ export async function fetchPhotos(page = 1, limit = 30) {
 }
 
 export async function fetchPhotoById(photoId) {
+  if (!photoId) {
+    throw new Error("Photo ID is required");
+  }
   try {
-    const response = await axios.get(`${BASE_URL}/list?page=1&limit=100`);
-    return response.data.find(photo => photo.id === photoId);
+    const response = await axios.get(`${PICSUM_API_URL}/id/${photoId}/info`);
+    return response.data;
   } catch (error) {
     console.error(`Error fetching photo with ID ${photoId}:`, error);
     throw error;
